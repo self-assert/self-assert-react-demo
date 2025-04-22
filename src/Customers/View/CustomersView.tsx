@@ -50,7 +50,7 @@ export class CustomersView extends React.Component<
                 <td>{customer.getLastName()}</td>
                 <td>{customer.getDNI()}</td>
                 <td>
-                  <Link to={`/customers/edit?dni=${customer.getDNI()}`}>
+                  <Link to={`/customers/edit/${customer.getDNI()}`}>
                     <Button
                       variant="outline-primary"
                       size="sm"

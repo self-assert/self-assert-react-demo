@@ -4,6 +4,7 @@ import { Menu } from './Menu';
 import { ALaGorraTransientSystem } from './System/ALaGorraTransientSystem';
 import { CustomersView } from './Customers/View/CustomersView';
 import { AddCustomerView } from './Customers/View/AddCustomerView';
+import { EditCustomerView } from './Customers/View/EditCustomerView';
 
 function App() {
   const system = new ALaGorraTransientSystem();
@@ -22,6 +23,10 @@ function App() {
             <Route
               path="/customers/add"
               element={<AddCustomerView system={system} />}
+            />
+            <Route
+              path="/customers/edit/:dni"
+              element={<EditCustomerView system={system} />}
             />
           </Routes>
         </div>
