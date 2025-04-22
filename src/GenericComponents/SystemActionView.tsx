@@ -1,16 +1,22 @@
 import React from 'react';
 import { Navigate } from 'react-router';
 import { RulesBroken, SectionDraftAssistant } from 'self-assert';
+import { SystemViewProps } from '../Types';
 
-export class SystemActionView extends React.Component<
-  unknown,
-  { redirect: boolean; redirectTo?: string }
-> {
-  constructor(props: unknown) {
+export type SystemActionViewState = {
+  redirect: boolean;
+  redirectTo?: string;
+};
+
+export class SystemActionView<
+  Props = SystemViewProps,
+  State extends SystemActionViewState = SystemActionViewState
+> extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       redirect: false,
-    };
+    } as State;
   }
 
   setRedirect = () => {
@@ -27,7 +33,10 @@ export class SystemActionView extends React.Component<
 
   async executeSystemAction(
     systemAction: () => Promise<void>,
-    formCompletionAssistant: SectionDraftAssistant<any, any, any>
+    formCompletionAssistant: Pick<
+      SectionDraftAssistant<unknown, unknown, unknown[]>,
+      'routeFailedAssertionsOf'
+    >
   ) {
     try {
       await systemAction();

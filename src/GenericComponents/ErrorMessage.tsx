@@ -17,8 +17,8 @@ export class ErrorMessage extends React.Component<ErrorMessageProps> {
     if (!this.hasFailedAssertionsToShow()) return null;
 
     return (
-      <div className="ui bottom attached negative message">
-        <ul>{this.errorDescriptions()}</ul>
+      <div className="alert alert-danger mt-2">
+        <ul className="mb-0">{this.errorDescriptions()}</ul>
       </div>
     );
   }

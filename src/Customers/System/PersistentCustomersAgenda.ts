@@ -1,4 +1,4 @@
-import { CustomersAgenda } from './CustomerAgenda';
+import { CustomersAgenda } from './CustomersAgenda';
 
 /**
  * Original comment by {@link https://github.com/hernanwilkinson @hernanwilkinson}:

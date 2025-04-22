@@ -1,5 +1,5 @@
 import { SalesBook } from '../Accounting/System/SalesBook';
-import { CustomersAgenda } from '../Customers/System/CustomerAgenda';
+import { CustomersAgenda } from '../Customers/System/CustomersAgenda';
 
 export interface ALaGorraSystem {
   getCustomersAgenda: () => CustomersAgenda;

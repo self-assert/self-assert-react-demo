@@ -1,6 +1,6 @@
 import { Ruleset } from 'self-assert';
 import { Customer } from '../Customer';
-import { CustomersAgenda } from './CustomerAgenda';
+import { CustomersAgenda } from './CustomersAgenda';
 
 export class TransientCustomersAgenda extends CustomersAgenda {
   protected customers: Customer[];
