@@ -24,7 +24,7 @@ export abstract class CustomersAgenda {
 
   abstract removeCustomerIdentifiedAs(aDNI: number): Promise<void>;
 
-  notDuplicatedDNIAssertion() {
+  notDuplicatedDNIInquiry() {
     return Inquiry.requiring<Customer>(
       CustomersAgenda.duplicatedDNIAID,
       CustomersAgenda.DUPLICATED_DNI,
@@ -33,7 +33,7 @@ export abstract class CustomersAgenda {
     );
   }
 
-  customerIsRegisteredAssertion() {
+  customerIsRegisteredInquiry() {
     return Inquiry.requiring<Customer>(
       CustomersAgenda.notExistingCustomerAID,
       CustomersAgenda.NOT_EXISTING_CUSTOMER,

@@ -2,7 +2,7 @@ import { DraftAssistant } from 'self-assert';
 import { FormField } from './FormField';
 
 interface InnerModelFormFieldState {
-  formCompletionAssistant: DraftAssistant<any, any> & {
+  formCompletionAssistant: DraftAssistant & {
     getInnerModel: () => string;
     setInnerModel: (value: string) => void;
   };

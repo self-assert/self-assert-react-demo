@@ -9,9 +9,10 @@ import { SystemViewProps } from '../../Types';
 import { CustomersAgenda } from '../System/CustomersAgenda';
 import { Customer } from '../Customer';
 import { Button } from 'react-bootstrap';
+import { DraftAssistant } from 'self-assert';
 
 interface AddCustomerViewState extends SystemActionViewState {
-  formCompletionAssistant: CustomerDraftAssistant<never>;
+  formCompletionAssistant: CustomerDraftAssistant;
   system: CustomersAgenda;
 }
 export class AddCustomerView extends SystemActionView<
@@ -27,7 +28,7 @@ export class AddCustomerView extends SystemActionView<
       system: props.system.getCustomersAgenda(),
       redirectTo: '/customers',
       formCompletionAssistant: CustomerView.createFormAssistant(
-        () => null as never,
+        DraftAssistant.topLevelModelFromContainer(),
         []
       ),
     };
@@ -36,29 +37,28 @@ export class AddCustomerView extends SystemActionView<
     );
   }
 
-  addClicked = () => {
-    this.setState((state) => {
-      state.formCompletionAssistant.withCreatedModelDo(
-        (customer) => this.addCustomer(customer),
-        () => null
-      );
-      return state;
-    });
+  addClicked = async () => {
+    await this.state.formCompletionAssistant.withCreatedModelDo(
+      (customer) => this.addCustomer(customer),
+      () => null
+    );
+
+    this.setState((state) => state);
   };
 
-  addCustomer(customer: Customer) {
-    this.executeSystemAction(
+  addCustomer = (customer: Customer) => {
+    return this.executeSystemAction(
       () => this.state.system.add(customer),
       this.state.formCompletionAssistant
     );
-  }
+  };
 
   render() {
     return (
-      <div className="container mt-3" style={{ maxWidth: '500px' }}>
+      <div className="container mt-3" style={{ maxWidth: '700px' }}>
         {this.renderRedirect()}
         <div className="card p-3 shadow-sm">
-          <form>
+          <form onSubmit={(e) => e.preventDefault()}>
             <CustomerView
               formCompletionAssistant={this.state.formCompletionAssistant}
             />

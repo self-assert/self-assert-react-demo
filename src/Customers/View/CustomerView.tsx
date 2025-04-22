@@ -1,34 +1,35 @@
 import React from 'react';
-import { Customer } from '../Customer';
-
-import { FormField } from '../../GenericComponents/FormField';
-import { ErrorMessage } from '../../GenericComponents/ErrorMessage';
-import { TimeDraftAssistant, TimeView } from '../../Time/View/TimeView';
 import {
   FieldDraftAssistant,
   IntegerDraftAssistant,
   SectionDraftAssistant,
 } from 'self-assert';
-import { Time } from '../../Time/Time';
-import { InnerModelFormField } from '../../GenericComponents/InnerModelFormField';
 
-export type CustomerDraftAssistant<ContainerModel> = SectionDraftAssistant<
-  Customer,
-  ContainerModel,
-  [
-    firstName: string,
-    lastName: string,
-    dni: number,
-    fromWorkingHours: Time,
-    toWorkingHours: Time
-  ]
-> & {
-  firstNameAssistant: FieldDraftAssistant<Customer, string>;
-  lastNameAssistant: FieldDraftAssistant<Customer, string>;
-  dniAssistant: IntegerDraftAssistant<Customer>;
-  fromWorkingHoursAssistant: TimeDraftAssistant<Customer>;
-  toWorkingHoursAssistant: TimeDraftAssistant<Customer>;
-};
+import { Customer } from '../Customer';
+import { TimeDraftAssistant, TimeView } from '../../Time/View/TimeView';
+import { Time } from '../../Time/Time';
+import { FormField } from '../../GenericComponents/FormField';
+import { InnerModelFormField } from '../../GenericComponents/InnerModelFormField';
+import { ErrorMessage } from '../../GenericComponents/ErrorMessage';
+
+export type CustomerDraftAssistant<ContainerModel = any> =
+  SectionDraftAssistant<
+    Customer,
+    ContainerModel,
+    [
+      firstName: string,
+      lastName: string,
+      dni: number,
+      fromWorkingHours: Time,
+      toWorkingHours: Time
+    ]
+  > & {
+    firstNameAssistant: FieldDraftAssistant<Customer, string>;
+    lastNameAssistant: FieldDraftAssistant<Customer, string>;
+    dniAssistant: IntegerDraftAssistant<Customer>;
+    fromWorkingHoursAssistant: TimeDraftAssistant<Customer>;
+    toWorkingHoursAssistant: TimeDraftAssistant<Customer>;
+  };
 
 export class CustomerView<ContainerModel> extends React.Component<{
   formCompletionAssistant: CustomerDraftAssistant<ContainerModel>;

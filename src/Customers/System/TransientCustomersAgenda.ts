@@ -1,13 +1,16 @@
 import { Ruleset } from 'self-assert';
 import { Customer } from '../Customer';
 import { CustomersAgenda } from './CustomersAgenda';
+import { Time } from '../../Time/Time';
 
 export class TransientCustomersAgenda extends CustomersAgenda {
   protected customers: Customer[];
 
   constructor() {
     super();
-    this.customers = [];
+    this.customers = [
+      Customer.named('John', 'Doe', 1, Time.at(9, 0, 0), Time.at(17, 0, 0)),
+    ];
   }
 
   async getCustomers() {
@@ -15,15 +18,15 @@ export class TransientCustomersAgenda extends CustomersAgenda {
   }
 
   async add(aCustomerToAdd: Customer) {
-    this.notDuplicatedDNIAssertion().mustHold(aCustomerToAdd);
+    await this.notDuplicatedDNIInquiry().mustHold(aCustomerToAdd);
 
     this.customers.push(aCustomerToAdd);
   }
 
   async update(anOriginalCustomer: Customer, aNewCustomer: Customer) {
     await Ruleset.workOn(
-      this.customerIsRegisteredAssertion().evaluateFor(anOriginalCustomer),
-      this.notDuplicatedDNIAssertion().evaluateFor(aNewCustomer)
+      this.customerIsRegisteredInquiry().evaluateFor(anOriginalCustomer),
+      this.notDuplicatedDNIInquiry().evaluateFor(aNewCustomer)
     );
 
     this.withCustomerIdentifiedAsIfNone(

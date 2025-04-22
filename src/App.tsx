@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router';
 import { Menu } from './Menu';
 import { ALaGorraTransientSystem } from './System/ALaGorraTransientSystem';
 import { CustomersView } from './Customers/View/CustomersView';
+import { AddCustomerView } from './Customers/View/AddCustomerView';
 
 function App() {
   const system = new ALaGorraTransientSystem();
@@ -17,6 +18,10 @@ function App() {
             <Route
               path="/customers"
               element={<CustomersView system={system} />}
+            />
+            <Route
+              path="/customers/add"
+              element={<AddCustomerView system={system} />}
             />
           </Routes>
         </div>

@@ -6,7 +6,7 @@ interface FormFieldProps {
   labelText?: string;
   inputName: string;
   inputPlaceHolder: string;
-  formCompletionAssistant: DraftAssistant<any, never>;
+  formCompletionAssistant: DraftAssistant;
   doNotShowErrorMessage?: boolean;
 }
 

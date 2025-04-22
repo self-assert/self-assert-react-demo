@@ -33,21 +33,15 @@ export class SystemActionView<
 
   async executeSystemAction(
     systemAction: () => Promise<void>,
-    formCompletionAssistant: Pick<
-      SectionDraftAssistant<unknown, unknown, unknown[]>,
-      'routeFailedAssertionsOf'
-    >
+    formCompletionAssistant: SectionDraftAssistant
   ) {
     try {
       await systemAction();
       this.setRedirect();
     } catch (error) {
-      if (error instanceof RulesBroken)
-        this.setState((state) => {
-          formCompletionAssistant.routeFailedAssertionsOf(error);
-          return state;
-        });
-      else throw error;
+      if (error instanceof RulesBroken) {
+        formCompletionAssistant.routeFailedAssertionsOf(error);
+      } else throw error;
     }
   }
 }

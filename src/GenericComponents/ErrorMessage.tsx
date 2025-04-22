@@ -2,15 +2,14 @@ import React from 'react';
 import { DraftAssistant } from 'self-assert';
 
 interface ErrorMessageProps {
-  formCompletionAssistant: DraftAssistant<any, never>;
+  formCompletionAssistant: DraftAssistant;
 }
 
 export class ErrorMessage extends React.Component<ErrorMessageProps> {
   errorDescriptions() {
-    let counter = 0;
     return this.props.formCompletionAssistant
       .failedAssertionsDescriptions()
-      .map((description) => <li key={counter++}>{description}</li>);
+      .map((description, i) => <li key={i}>{description}</li>);
   }
 
   render() {
