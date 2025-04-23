@@ -31,16 +31,28 @@ export type CustomerDraftAssistant<ContainerModel = any> =
     toWorkingHoursAssistant: TimeDraftAssistant<Customer>;
   };
 
-export class CustomerView<ContainerModel> extends React.Component<{
+interface CustomerViewProps<ContainerModel> {
   formCompletionAssistant: CustomerDraftAssistant<ContainerModel>;
-}> {
+}
+
+export class CustomerView<ContainerModel> extends React.Component<
+  CustomerViewProps<ContainerModel>,
+  { rulesOnServer: boolean }
+> {
   static createFormAssistant<ContainerModel>(
     getterFromContainerModel: (model: ContainerModel) => Customer,
-    assertionsId = []
+    validateRulesOnServer = false
   ): CustomerDraftAssistant<ContainerModel> {
+    console.log(
+      `Customer rules will be evaluated on: ${
+        validateRulesOnServer ? 'server' : 'client'
+      }`
+    );
+
     const firstNameAssistant = this.createFirstNameAssistant();
     const lastNameAssistant = this.createLastNameAssistant();
     const dniAssistant = this.createDNIAssistant();
+
     const fromWorkingHoursAssistant = this.createFromWorkingHoursAssistant();
     const toWorkingHoursAssistant = this.createToWorkingHoursAssistant();
 
@@ -52,18 +64,25 @@ export class CustomerView<ContainerModel> extends React.Component<{
         fromWorkingHoursAssistant,
         toWorkingHoursAssistant,
       ],
-      (firstName, lastName, dni, fromWorkingHours, toWorkingHours) =>
-        // Para que la validación se haga en el server, reemplazar
-        // Customer.name por new Customer. Esto solo es válido si se está usando el server
-        Customer.named(
-          firstName,
-          lastName,
-          dni,
-          fromWorkingHours,
-          toWorkingHours
-        ),
+      (firstName, lastName, dni, fromWorkingHours, toWorkingHours) => {
+        return validateRulesOnServer
+          ? new Customer(
+              firstName,
+              lastName,
+              dni,
+              fromWorkingHours,
+              toWorkingHours
+            )
+          : Customer.named(
+              firstName,
+              lastName,
+              dni,
+              fromWorkingHours,
+              toWorkingHours
+            );
+      },
       getterFromContainerModel,
-      assertionsId
+      []
     );
 
     return Object.assign(customerAssistant, {
@@ -107,9 +126,15 @@ export class CustomerView<ContainerModel> extends React.Component<{
     );
   }
 
+  constructor(props: CustomerViewProps<ContainerModel>) {
+    super(props);
+    this.state = {
+      rulesOnServer: false,
+    };
+  }
+
   render() {
     const { formCompletionAssistant } = this.props;
-
     return (
       <>
         <div className="mb-3">

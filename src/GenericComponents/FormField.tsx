@@ -2,7 +2,7 @@ import React from 'react';
 import { ErrorMessage } from './ErrorMessage';
 import { DraftAssistant } from 'self-assert';
 
-interface FormFieldProps {
+export interface FormFieldProps {
   labelText?: string;
   inputName: string;
   inputPlaceHolder: string;
@@ -10,16 +10,7 @@ interface FormFieldProps {
   doNotShowErrorMessage?: boolean;
 }
 
-export type FormFieldState = Pick<FormFieldProps, 'formCompletionAssistant'>;
-
-export class FormField extends React.Component<FormFieldProps, FormFieldState> {
-  constructor(props: FormFieldProps) {
-    super(props);
-    this.state = {
-      formCompletionAssistant: props.formCompletionAssistant,
-    };
-  }
-
+export class FormField extends React.Component<FormFieldProps> {
   render() {
     return (
       <div className="field">
@@ -39,10 +30,8 @@ export class FormField extends React.Component<FormFieldProps, FormFieldState> {
 
   onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.persist();
-    this.setState((state) => {
-      this.setModel(state, e);
-      return state;
-    });
+    this.setModel(e);
+    this.setState(() => ({}));
   };
 
   errorMessage() {
@@ -61,8 +50,8 @@ export class FormField extends React.Component<FormFieldProps, FormFieldState> {
     return <label className="form-label">{this.props.labelText}</label>;
   }
 
-  setModel(state: FormFieldState, e: React.ChangeEvent<HTMLInputElement>) {
-    state.formCompletionAssistant.setModel(e.target.value);
+  setModel(e: React.ChangeEvent<HTMLInputElement>) {
+    this.props.formCompletionAssistant.setModel(e.target.value);
   }
 
   getModel() {

@@ -24,6 +24,12 @@ export class CustomersView extends React.Component<
     this.setState({ customers });
   }
 
+  componentDidUpdate(prevProps: Readonly<SystemViewProps>): void {
+    if (prevProps.system !== this.props.system) {
+      this.componentDidMount();
+    }
+  }
+
   async delete(aDNI: number) {
     await this.props.system
       .getCustomersAgenda()

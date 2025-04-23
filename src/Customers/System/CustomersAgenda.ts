@@ -24,11 +24,12 @@ export abstract class CustomersAgenda {
 
   abstract removeCustomerIdentifiedAs(aDNI: number): Promise<void>;
 
-  doesNotDuplicateDNIInquiry() {
+  doesNotDuplicateDNIInquiry(exception?: Customer) {
     return Inquiry.requiring<Customer>(
       CustomersAgenda.duplicatedDNIAID,
       CustomersAgenda.DUPLICATED_DNI,
       async (aCustomerToAdd) =>
+        exception?.isIdentifiedAs(aCustomerToAdd.getDNI()) ||
         !(await this.hasCustomerIdentifiedAs(aCustomerToAdd.getDNI()))
     );
   }

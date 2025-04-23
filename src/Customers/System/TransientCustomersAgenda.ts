@@ -26,7 +26,9 @@ export class TransientCustomersAgenda extends CustomersAgenda {
   async update(anOriginalCustomer: Customer, aNewCustomer: Customer) {
     await Ruleset.workOn(
       this.customerIsRegisteredInquiry().evaluateFor(anOriginalCustomer),
-      this.doesNotDuplicateDNIInquiry().evaluateFor(aNewCustomer)
+      this.doesNotDuplicateDNIInquiry(anOriginalCustomer).evaluateFor(
+        aNewCustomer
+      )
     );
 
     this.withCustomerIdentifiedAsIfNone(

@@ -15,11 +15,16 @@ interface AddCustomerViewState extends SystemActionViewState {
   formCompletionAssistant: CustomerDraftAssistant;
   system: CustomersAgenda;
 }
+
+interface AddCustomerViewProps extends SystemViewProps {
+  rulesOnServer: boolean;
+}
+
 export class AddCustomerView extends SystemActionView<
-  SystemViewProps,
+  AddCustomerViewProps,
   AddCustomerViewState
 > {
-  constructor(props: SystemViewProps) {
+  constructor(props: AddCustomerViewProps) {
     super(props);
 
     const redirect = this.state.redirect;
@@ -29,13 +34,21 @@ export class AddCustomerView extends SystemActionView<
       redirectTo: '/customers',
       formCompletionAssistant: CustomerView.createFormAssistant(
         DraftAssistant.topLevelModelFromContainer(),
-        []
+        props.rulesOnServer
       ),
     };
+  }
 
-    this.state.formCompletionAssistant.dniAssistant.addLabelId(
-      CustomersAgenda.duplicatedDNIAID
-    );
+  componentDidUpdate(prevProps: Readonly<AddCustomerViewProps>): void {
+    if (prevProps.rulesOnServer !== this.props.rulesOnServer) {
+      const assistant = CustomerView.createFormAssistant(
+        DraftAssistant.topLevelModelFromContainer(),
+        this.props.rulesOnServer
+      );
+      this.setState({
+        formCompletionAssistant: assistant,
+      });
+    }
   }
 
   addClicked = async () => {

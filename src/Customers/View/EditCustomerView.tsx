@@ -19,6 +19,7 @@ interface EditCustomerViewState extends SystemActionViewState {
 
 interface EditCustomerViewProps extends SystemViewProps {
   customerDNI: number;
+  rulesOnServer: boolean;
 }
 
 class EditCustomerViewWrapped extends SystemActionView<
@@ -35,12 +36,9 @@ class EditCustomerViewWrapped extends SystemActionView<
       redirectTo: '/customers',
       formCompletionAssistant: CustomerView.createFormAssistant(
         DraftAssistant.topLevelModelFromContainer(),
-        []
+        props.rulesOnServer
       ),
     };
-    this.state.formCompletionAssistant.dniAssistant.addLabelId(
-      CustomersAgenda.duplicatedDNIAID
-    );
   }
 
   async componentDidMount() {

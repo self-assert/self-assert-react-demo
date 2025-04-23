@@ -1,7 +1,7 @@
 import { DraftAssistant } from 'self-assert';
-import { FormField } from './FormField';
+import { FormField, FormFieldProps } from './FormField';
 
-interface InnerModelFormFieldState {
+interface InnerModelFormFieldProps extends FormFieldProps {
   formCompletionAssistant: DraftAssistant & {
     getInnerModel: () => string;
     setInnerModel: (value: string) => void;
@@ -9,16 +9,13 @@ interface InnerModelFormFieldState {
 }
 
 export class InnerModelFormField extends FormField {
-  declare state: InnerModelFormFieldState;
+  declare props: InnerModelFormFieldProps;
 
-  override setModel(
-    state: InnerModelFormFieldState,
-    e: React.ChangeEvent<HTMLInputElement>
-  ) {
-    state.formCompletionAssistant.setInnerModel(e.target.value);
+  override setModel(e: React.ChangeEvent<HTMLInputElement>) {
+    this.props.formCompletionAssistant.setInnerModel(e.target.value);
   }
 
   getModel() {
-    return this.state.formCompletionAssistant.getInnerModel();
+    return this.props.formCompletionAssistant.getInnerModel();
   }
 }
