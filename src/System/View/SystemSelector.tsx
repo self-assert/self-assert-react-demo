@@ -27,9 +27,7 @@ export function SystemSelector({
         </select>
         {systemType === 'server' && (
           <div className="alert alert-info mt-3 center" role="alert">
-            Server mode is fully mocked using <code>msw</code>. Open the console
-            to inspect requests.
-            <p className="mb-2 mt-3 text-muted">
+            <p className="mb-2 text-muted">
               <strong>Note:</strong> You can choose whether validation rules run
               on the client or the server. Enabling this simulates a scenario
               where the model is validated by the backend only.

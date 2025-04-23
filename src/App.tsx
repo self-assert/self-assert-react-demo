@@ -11,6 +11,7 @@ import { ALaGorraServerSystem } from './System/ALaGorraServerSystem';
 import { worker } from './Server';
 import { TransientCustomersAgenda } from './Customers/System/TransientCustomersAgenda';
 import { SystemSelector } from './System/View/SystemSelector';
+import { Home } from './Home';
 
 function App() {
   const [systemType, setSystemType] = React.useState<'transient' | 'server'>(
@@ -44,7 +45,7 @@ function App() {
             setRulesOnServer={setRulesOnServer}
           />
           <Routes>
-            <Route path="/" element={null} />
+            <Route path="/" element={<Home />} />
             <Route
               path="/customers"
               element={<CustomersView system={system} />}

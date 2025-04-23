@@ -7,6 +7,11 @@ export class Menu extends React.Component {
     return (
       <Nav variant="tabs" className="mb-3">
         <Nav.Item>
+          <Nav.Link as={Link} to="/">
+            Home
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
           <Nav.Link as={Link} to="/customers">
             Customers
           </Nav.Link>
