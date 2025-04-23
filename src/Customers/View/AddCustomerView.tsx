@@ -32,7 +32,8 @@ export class AddCustomerView extends SystemActionView<
         []
       ),
     };
-    this.state.formCompletionAssistant.dniAssistant.addAssertionId(
+
+    this.state.formCompletionAssistant.dniAssistant.addLabelId(
       CustomersAgenda.duplicatedDNIAID
     );
   }

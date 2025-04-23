@@ -8,7 +8,7 @@ interface ErrorMessageProps {
 export class ErrorMessage extends React.Component<ErrorMessageProps> {
   errorDescriptions() {
     return this.props.formCompletionAssistant
-      .failedAssertionsDescriptions()
+      .brokenRulesDescriptions()
       .map((description, i) => <li key={i}>{description}</li>);
   }
 
@@ -23,6 +23,6 @@ export class ErrorMessage extends React.Component<ErrorMessageProps> {
   }
 
   hasFailedAssertionsToShow() {
-    return this.props.formCompletionAssistant.hasFailedAssertions();
+    return this.props.formCompletionAssistant.hasBrokenRules();
   }
 }

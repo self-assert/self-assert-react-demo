@@ -5,9 +5,19 @@ import { ALaGorraTransientSystem } from './System/ALaGorraTransientSystem';
 import { CustomersView } from './Customers/View/CustomersView';
 import { AddCustomerView } from './Customers/View/AddCustomerView';
 import { EditCustomerView } from './Customers/View/EditCustomerView';
+import { ALaGorraSystemClient } from './System/ALaGorraSystemClient';
+import { ALaGorraServerSystem } from './System/ALaGorraServerSystem';
+import { worker } from './Server';
+import { TransientCustomersAgenda } from './Customers/System/TransientCustomersAgenda';
 
 function App() {
-  const system = new ALaGorraTransientSystem();
+  // const system = new ALaGorraTransientSystem();
+  ALaGorraServerSystem.start(
+    worker,
+    ALaGorraSystemClient.baseUrl,
+    new TransientCustomersAgenda()
+  );
+  const system = new ALaGorraSystemClient();
 
   return (
     <>

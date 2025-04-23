@@ -38,7 +38,7 @@ class EditCustomerViewWrapped extends SystemActionView<
         []
       ),
     };
-    this.state.formCompletionAssistant.dniAssistant.addAssertionId(
+    this.state.formCompletionAssistant.dniAssistant.addLabelId(
       CustomersAgenda.duplicatedDNIAID
     );
   }
@@ -46,18 +46,18 @@ class EditCustomerViewWrapped extends SystemActionView<
   async componentDidMount() {
     this.state.system.withCustomerIdentifiedAsIfNone(
       this.props.customerDNI,
-      (customerToEdit) =>
+      (customerToEdit) => {
+        this.state.formCompletionAssistant.setModel(customerToEdit);
         this.setState((state) => {
-          state.formCompletionAssistant.setModel(customerToEdit);
           return { ...state, customerToEdit };
-        }),
-      () =>
-        this.setState((state) => {
-          state.formCompletionAssistant.addFailedAssertion(
-            state.system.customerIsRegisteredInquiry()
-          );
-          return state;
-        })
+        });
+      },
+      () => {
+        this.state.formCompletionAssistant.addBrokenRule(
+          this.state.system.customerIsRegisteredInquiry()
+        );
+        this.setState((state) => state);
+      }
     );
   }
 
