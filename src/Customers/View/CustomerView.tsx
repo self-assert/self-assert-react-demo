@@ -179,7 +179,7 @@ export class CustomerView<ContainerModel> extends React.Component<
             />
           </div>
         </div>
-        <ErrorMessage formCompletionAssistant={formCompletionAssistant} />
+        <ErrorMessage draftAssistant={formCompletionAssistant} />
       </>
     );
   }

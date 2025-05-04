@@ -1,28 +1,8 @@
-import React from 'react';
-import { DraftAssistant } from 'self-assert';
+import {
+  ErrorMessage as SelfAssertErrorMessage,
+  ErrorMessageProps,
+} from '@self-assert/react';
 
-interface ErrorMessageProps {
-  formCompletionAssistant: DraftAssistant;
-}
-
-export class ErrorMessage extends React.Component<ErrorMessageProps> {
-  errorDescriptions() {
-    return this.props.formCompletionAssistant
-      .brokenRulesDescriptions()
-      .map((description, i) => <li key={i}>{description}</li>);
-  }
-
-  render() {
-    if (!this.hasFailedAssertionsToShow()) return null;
-
-    return (
-      <div className="alert alert-danger mt-2">
-        <ul className="mb-0">{this.errorDescriptions()}</ul>
-      </div>
-    );
-  }
-
-  hasFailedAssertionsToShow() {
-    return this.props.formCompletionAssistant.hasBrokenRules();
-  }
-}
+export const ErrorMessage = (props: ErrorMessageProps) => (
+  <SelfAssertErrorMessage className="alert alert-danger my-2" {...props} />
+);

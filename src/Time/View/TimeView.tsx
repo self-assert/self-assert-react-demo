@@ -76,7 +76,7 @@ export class TimeView<ContainerModel> extends React.Component<{
             doNotShowErrorMessage={true}
           />
         </div>
-        <ErrorMessage formCompletionAssistant={formCompletionAssistant} />
+        <ErrorMessage draftAssistant={formCompletionAssistant} />
       </div>
     );
   }

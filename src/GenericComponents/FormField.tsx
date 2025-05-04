@@ -37,11 +37,7 @@ export class FormField extends React.Component<FormFieldProps> {
   errorMessage() {
     if (this.props.doNotShowErrorMessage) return null;
 
-    return (
-      <ErrorMessage
-        formCompletionAssistant={this.props.formCompletionAssistant}
-      />
-    );
+    return <ErrorMessage draftAssistant={this.props.formCompletionAssistant} />;
   }
 
   label() {
