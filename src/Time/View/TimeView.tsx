@@ -16,7 +16,7 @@ export type TimeDraftAssistant<Model> = SectionDraftAssistant<
 };
 
 export class TimeView<ContainerModel> extends React.Component<{
-  formCompletionAssistant: TimeDraftAssistant<ContainerModel>;
+  draftAssistant: TimeDraftAssistant<ContainerModel>;
 }> {
   static createFormAssistant<ContainerModel>(
     getterFromContainerModel: (model: ContainerModel) => Time,
@@ -47,7 +47,7 @@ export class TimeView<ContainerModel> extends React.Component<{
   }
 
   render() {
-    const { formCompletionAssistant } = this.props;
+    const { draftAssistant } = this.props;
 
     return (
       <div>
@@ -56,27 +56,24 @@ export class TimeView<ContainerModel> extends React.Component<{
           style={{ width: '250px' }}
         >
           <InnerModelFormField
-            inputName="hour"
-            inputPlaceHolder="00"
-            formCompletionAssistant={formCompletionAssistant.hour}
-            doNotShowErrorMessage={true}
+            inputProps={{ name: 'hour', placeholder: '00' }}
+            draftAssistant={draftAssistant.hour}
+            showErrorMessage={false}
           />
           <span>:</span>
           <InnerModelFormField
-            inputName="minute"
-            inputPlaceHolder="00"
-            formCompletionAssistant={formCompletionAssistant.minute}
-            doNotShowErrorMessage={true}
+            inputProps={{ name: 'minute', placeholder: '00' }}
+            draftAssistant={draftAssistant.minute}
+            showErrorMessage={false}
           />
           <span>:</span>
           <InnerModelFormField
-            inputName="second"
-            inputPlaceHolder="00"
-            formCompletionAssistant={formCompletionAssistant.second}
-            doNotShowErrorMessage={true}
+            inputProps={{ name: 'second', placeholder: '00' }}
+            draftAssistant={draftAssistant.second}
+            showErrorMessage={false}
           />
         </div>
-        <ErrorMessage draftAssistant={formCompletionAssistant} />
+        <ErrorMessage draftAssistant={draftAssistant} />
       </div>
     );
   }
