@@ -81,9 +81,7 @@ class EditCustomerViewWrapped extends SystemActionView<
         {this.renderRedirect()}
         <div className="card p-3 shadow-sm">
           <form>
-            <CustomerView
-              formCompletionAssistant={this.state.formCompletionAssistant}
-            />
+            <CustomerView draftAssistant={this.state.formCompletionAssistant} />
           </form>
           <div className="mt-3 d-flex gap-2">
             <Button className="btn btn-success" onClick={this.modifyClicked}>

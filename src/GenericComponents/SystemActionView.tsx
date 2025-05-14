@@ -40,7 +40,7 @@ export class SystemActionView<
       this.setRedirect();
     } catch (error) {
       if (error instanceof RulesBroken) {
-        formCompletionAssistant.routeFailedAssertionsOf(error);
+        formCompletionAssistant.routeBrokenRulesOf(error);
       } else throw error;
     }
   }

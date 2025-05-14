@@ -6,7 +6,7 @@ of his webinar [Diseño a la Gorra](https://github.com/hernanwilkinson/disenioAL
 
 For more information, see [this reference](https://github.com/hernanwilkinson/disenioALaGorra/tree/a6d90a0044bf69f98fb50584872b226bf678e67b/Temporada01/Episodio03%20-%20Modelar%20los%20Conjuntos%20de%20Objetos).
 
-Try the demo [ live on CodeSandbox](https://codesandbox.io/p/sandbox/github/self-assert/self-assert-react-demo)
+Try the demo [live on CodeSandbox](https://codesandbox.io/p/sandbox/github/self-assert/self-assert-react-demo)
 or clone it locally to explore how self-assert works with real form interactions.
 
 ```bash

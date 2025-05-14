@@ -32,7 +32,7 @@ export type CustomerDraftAssistant<ContainerModel = any> =
   };
 
 interface CustomerViewProps<ContainerModel> {
-  formCompletionAssistant: CustomerDraftAssistant<ContainerModel>;
+  draftAssistant: CustomerDraftAssistant<ContainerModel>;
 }
 
 export class CustomerView<ContainerModel> extends React.Component<
@@ -134,52 +134,47 @@ export class CustomerView<ContainerModel> extends React.Component<
   }
 
   render() {
-    const { formCompletionAssistant } = this.props;
+    const { draftAssistant } = this.props;
+
     return (
       <>
         <div className="mb-3">
           <FormField
             labelText="First Name"
-            inputName="first-name"
-            inputPlaceHolder="First Name"
-            formCompletionAssistant={formCompletionAssistant.firstNameAssistant}
+            inputProps={{ name: 'first-name', placeholder: 'First Name' }}
+            labelProps={{ htmlFor: 'first-name' }}
+            draftAssistant={draftAssistant.firstNameAssistant}
           />
         </div>
         <div className="mb-3">
           <FormField
             labelText="Last Name"
-            inputName="last-name"
-            inputPlaceHolder="Last Name"
-            formCompletionAssistant={formCompletionAssistant.lastNameAssistant}
+            inputProps={{ name: 'last-name', placeholder: 'Last Name' }}
+            labelProps={{ htmlFor: 'last-name' }}
+            draftAssistant={draftAssistant.lastNameAssistant}
           />
         </div>
         <div className="mb-3">
           <InnerModelFormField
             labelText="DNI"
-            inputName="dni"
-            inputPlaceHolder="DNI"
-            formCompletionAssistant={formCompletionAssistant.dniAssistant}
+            inputProps={{ name: 'dni', placeholder: 'DNI' }}
+            labelProps={{ htmlFor: 'dni' }}
+            draftAssistant={draftAssistant.dniAssistant}
           />
         </div>
         <div className="row">
           <div className="col-md-6 mb-3">
             <label className="form-label">Working From</label>
             <TimeView
-              formCompletionAssistant={
-                formCompletionAssistant.fromWorkingHoursAssistant
-              }
+              draftAssistant={draftAssistant.fromWorkingHoursAssistant}
             />
           </div>
           <div className="col-md-6 mb-3">
             <label className="form-label">To</label>
-            <TimeView
-              formCompletionAssistant={
-                formCompletionAssistant.toWorkingHoursAssistant
-              }
-            />
+            <TimeView draftAssistant={draftAssistant.toWorkingHoursAssistant} />
           </div>
         </div>
-        <ErrorMessage formCompletionAssistant={formCompletionAssistant} />
+        <ErrorMessage draftAssistant={draftAssistant} />
       </>
     );
   }

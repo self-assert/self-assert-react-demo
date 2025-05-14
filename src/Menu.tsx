@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Nav } from 'react-bootstrap';
+import { AppConstants } from './constants';
 
 export class Menu extends React.Component {
   render() {
@@ -24,6 +25,21 @@ export class Menu extends React.Component {
             Invoices
           </Nav.Link>
         </Nav.Item> */}
+        <div className="flex-grow-1"></div>
+        <Nav.Item>
+          <Nav.Link
+            as={Link}
+            to={AppConstants.documentationUrl}
+            target="_blank"
+          >
+            Documentation
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link as={Link} to={AppConstants.repoUrl} target="_blank">
+            <img src="/github-mark.png" alt="Source code" height="25px" />
+          </Nav.Link>
+        </Nav.Item>
       </Nav>
     );
   }

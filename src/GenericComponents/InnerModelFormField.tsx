@@ -1,21 +1,29 @@
-import { DraftAssistant } from 'self-assert';
-import { FormField, FormFieldProps } from './FormField';
+import {
+  useBrokenRulesDescriptions,
+  type FormFieldProps,
+} from '@self-assert/react';
+import type { DraftAssistant } from 'self-assert';
+import { FormField } from './FormField';
 
-interface InnerModelFormFieldProps extends FormFieldProps {
-  formCompletionAssistant: DraftAssistant & {
-    getInnerModel: () => string;
-    setInnerModel: (value: string) => void;
+interface InnerModelFormFieldProps<Model extends string>
+  extends FormFieldProps<Model> {
+  draftAssistant: DraftAssistant & {
+    innerAssistant: () => DraftAssistant<Model>;
   };
 }
 
-export class InnerModelFormField extends FormField {
-  declare props: InnerModelFormFieldProps;
+export function InnerModelFormField<Model extends string>({
+  draftAssistant,
+  ...props
+}: InnerModelFormFieldProps<Model>) {
+  const brokenRules = useBrokenRulesDescriptions(draftAssistant);
+  const innerAssistant = draftAssistant.innerAssistant();
 
-  override setModel(e: React.ChangeEvent<HTMLInputElement>) {
-    this.props.formCompletionAssistant.setInnerModel(e.target.value);
-  }
-
-  getModel() {
-    return this.props.formCompletionAssistant.getInnerModel();
-  }
+  return (
+    <FormField
+      draftAssistant={innerAssistant}
+      {...props}
+      brokenRulesDescriptions={brokenRules}
+    />
+  );
 }
