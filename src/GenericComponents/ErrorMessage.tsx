@@ -1,6 +1,6 @@
 import {
   ErrorMessage as SelfAssertErrorMessage,
-  ErrorMessageProps,
+  type ErrorMessageProps,
 } from '@self-assert/react';
 
 export const ErrorMessage = (props: ErrorMessageProps) => (
