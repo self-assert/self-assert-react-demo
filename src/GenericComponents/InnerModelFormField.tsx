@@ -1,4 +1,7 @@
-import type { FormFieldProps } from '@self-assert/react';
+import {
+  useBrokenRulesDescriptions,
+  type FormFieldProps,
+} from '@self-assert/react';
 import type { DraftAssistant } from 'self-assert';
 import { FormField } from './FormField';
 
@@ -13,7 +16,14 @@ export function InnerModelFormField<Model extends string>({
   draftAssistant,
   ...props
 }: InnerModelFormFieldProps<Model>) {
+  const brokenRules = useBrokenRulesDescriptions(draftAssistant);
   const innerAssistant = draftAssistant.innerAssistant();
 
-  return <FormField draftAssistant={innerAssistant} {...props} />;
+  return (
+    <FormField
+      draftAssistant={innerAssistant}
+      {...props}
+      brokenRulesDescriptions={brokenRules}
+    />
+  );
 }

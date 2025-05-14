@@ -20,7 +20,10 @@ export const FormField = <Model extends string>({
         showErrorMessage={false}
       />
       {showErrorMessage && (
-        <ErrorMessage draftAssistant={props.draftAssistant} />
+        <ErrorMessage
+          draftAssistant={props.draftAssistant}
+          brokenRulesDescriptions={props.brokenRulesDescriptions}
+        />
       )}
     </>
   );
