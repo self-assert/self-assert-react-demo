@@ -10,9 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@self-assert/react": "^0.3.0",
+    "@self-assert/react": "^0.3.1",
     "bootstrap": "^5.3.6",
-    "msw": "^2.8.2",
+    "msw": "^2.8.4",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.0",
